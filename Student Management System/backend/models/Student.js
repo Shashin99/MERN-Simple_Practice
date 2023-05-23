@@ -1,12 +1,12 @@
-const mongoose = require('mongoose'); // to connect with mongo db 
+const mongoose = require('mongoose'); 
 
-const Schema = mongoose.Schema; // create class 
+const Schema = mongoose.Schema; 
 
-const studentSchema = new Schema({ // create object 
-    // attributes insert inside the object
-    name : {      // attribute - (properties)
+const studentSchema = new Schema({ 
+  
+    name : {    
         type: String,
-        required: true // backend validation - required   ( connect with routes)
+        required: true 
     },
 
     age : {
@@ -23,4 +23,4 @@ const studentSchema = new Schema({ // create object
 
 const Student = mongoose.model("Student" , studentSchema) // mogoose.model ("table_name" ,schema_name)
 
-module.exports = Student;     // must be exported 
+module.exports = Student;  
