@@ -1,17 +1,14 @@
 const router = require("express").Router();
 let Student = require("../models/Student");
 
-// http://localhost:8070/student/add ---- student.js file the operation insert(create route) (add)
-
-router.route("/add").post((req,res) => {  // post -----> http request method   get----> security less
+// http://localhost:8070/student/add 
+router.route("/add").post((req,res) => {  
     
-    // body excuted   ------ //( dstructure model --- most easiet method and easy code 1 line  )
-
-    const name =  req.body.name; // attributes gained in Student.js
+    const name =  req.body.name; 
     const age = Number(req.body.age);
     const gender = req.body.gender;
 
-    const newStudent = new Student({ // create object with model import 
+    const newStudent = new Student({ 
 
         name,
         age,
@@ -19,18 +16,17 @@ router.route("/add").post((req,res) => {  // post -----> http request method   g
     })
 
     // insert values to the database 
-    newStudent.save().then(()=>{  // then catch ( exception handling --- async wait ) ----> like if else
-        res.json("Student Added") // show the message if success  --- json format 
-    }).catch((err)=>{ // else
-        console.log(err); // show the error in console
+    newStudent.save().then(()=>{ 
+        res.json("Student Added") 
+    }).catch((err)=>{ 
+        console.log(err); 
     })
 })
 
 // http://localhost:8070/Student
-
 router.route("/").get((req,res) =>{
 
-    Student.find().then((students)=>{ // find ---> get all students details
+    Student.find().then((students)=>{ 
         res.json(students) // respone is the retriew students in the database as a json file
     }).catch((err)=>{
         console.log(err)
