@@ -27,28 +27,28 @@ router.route("/add").post((req,res) => {
 router.route("/").get((req,res) =>{
 
     Student.find().then((students)=>{ 
-        res.json(students) // respone is the retriew students in the database as a json file
+        res.json(students) 
     }).catch((err)=>{
         console.log(err)
     })
 })
 
-// http//localhost:8070/student/update/(id) ----> update/id of the student 
-router.route("/update/:id").put(async (req,res)=>{ // : must ----> :studentId
+// http//localhost:8070/student/update/(id)
+router.route("/update/:id").put(async (req,res)=>{ 
     let userId = req.params.id;
-    const{name,age,gender} = req.body; //destructure method // updated  details
+    const{name,age,gender} = req.body;
 
-    const updateStudent = { // object create update student
+    const updateStudent = { 
         name,  
         age,
         gender,
     }
 
-    const update  = await Student.findByIdAndUpdate(userId, updateStudent).then(()=>{   // check whether id has in the system ---> model  (user id,{ name, age , gender})
-        res.status(200).send({status: "user update"})                   // or can send updated user({status: "user update", user: updated})
+    const update  = await Student.findByIdAndUpdate(userId, updateStudent).then(()=>{  
+        res.status(200).send({status: "user update"})                  
     }).catch((err)=>{
         console.log(err);
-        res.status(500).send({status: "Error with updating data", error: err.message}); // error
+        res.status(500).send({status: "Error with updating data", error: err.message});
     })
 })
 
@@ -68,11 +68,11 @@ router.route("/delete/:id").delete(async(req,res)=> {
 // only get 1 student ----
 router.route("/get/:id").get(async (req,res)=>{
     let userId = req.params.id;
-    const user = await Student.findById(userId) // if use email ----> await Student.findOne(email)
-    .then((student)=>{  // then((student) ---> 
-        res.status(200).send({status:"User Fetched", student}); // ({status:"User Fetched", user:user}) ---> updated user frontend ekata yawanna
+    const user = await Student.findById(userId) 
+    .then((student)=>{  
+        res.status(200).send({status:"User Fetched", student});
     }).catch(()=>{
-        res.status(500).send({status:" Error with get user ", error:err.message}); //status --> not a key word
+        res.status(500).send({status:" Error with get user ", error:err.message}); 
     })
 })
 
